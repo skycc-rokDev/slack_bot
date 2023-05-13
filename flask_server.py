@@ -17,15 +17,40 @@ def post_message(token, channel, text):
 
 def usage() :
     string = ""
-    string += "--- usage ---\n"
-    string += "1. my_info"
+    string += "[usage]\n"
+    string += "- my_info [your_mail] [your_pw]\n"
+    string += "- add_friend [your_mail] [your_pw] [target_token]\n"
+    string += "- del_friend [your_mail] [your_pw] [target_token]\n"
+    return string
+
+def my_info() :
+    string = "to do\n"
+    string += ""
+    return string
+
+def add_friend() :
+    string = "to do\n"
+    string += ""
+    return string
+
+def del_friend() :
+    string = "to do\n"
+    string += ""
+    return string
+
+
+def not_command() :
+    string = ""
+    string += "command not found :)\n"
+    string += "@inple_Bot help\n"
     return string
 
 def get_answer(user_query):
-    print(user_query)
     if (user_query == "help") :
         return usage()
-    return user_query
+    elif (user_query == "my_info") :
+        return my_info()
+    return not_command()
 
 def event_handler(event_type, slack_event):
     channel = slack_event["event"]["channel"]
