@@ -17,6 +17,7 @@ def post_message(token, channel, text):
     print(response)
 
 def get_answer(user_query, full_query):
+    print(user_query)
     if (user_query == "help") :
         return func_usage()
     elif (user_query == "my_info ") :
@@ -29,6 +30,8 @@ def get_answer(user_query, full_query):
         return func_register(full_query)
     elif (user_query == "card_add ") :
         return func_card_add(full_query)
+    elif (user_query == "card_delete ") :
+        return func_card_del(full_query)
     return func_not_command()
 
 def event_handler(event_type, slack_event):

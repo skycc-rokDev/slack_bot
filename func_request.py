@@ -11,6 +11,14 @@ def get_my_token(email, pw) :
     #except :
     #    return 0
 
+def delete_request_token(url, token) :
+    headers = {'token': token}
+    print(url)
+    print(headers)
+    response = requests.delete(url, headers=headers)
+    print(response.text)
+    return response.status_code
+
 def post_request_token(url, data, token) :
     headers = {'token': token}
     print(url)
@@ -21,7 +29,7 @@ def post_request_token(url, data, token) :
 def get_request_token(url, token) :
     headers = {'token': token}
     response = requests.get(url, headers=headers)
-    print(response)
+    print("[get_requset_token]" + str(response))
     return response.status_code, response.text
 
 def post_request(url, data) :

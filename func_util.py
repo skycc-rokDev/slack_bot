@@ -10,7 +10,19 @@ def func_usage() :
     string += "- del_friend [your_mail] [your_pw] [target_token]\n"
     string += "- register [your_mail] [your_pw]\n"
     string += "- card_add [your_main] [your_pw] [email2] [name] [company] [phone] [address] [site] [role]\n"
+    string += "- card_delete [your_mail] [your_pw]\n"
     return string
+
+def func_card_del(full_query) :
+    email = full_query[2]['url'].split("mailto:")[1]
+    pw = full_query[3]['text'][1:]
+    token = get_my_token(email, pw.split(" ")[0])
+    print("token : " + token)
+    url = host + "/card/delete"
+    status = delete_request_token(url, token)
+    if (status == 200) :
+        return "[+] success"
+    return "[-] fail :("
 
 def func_card_add(full_query) :
     try :
@@ -57,7 +69,6 @@ def func_my_info(full_query) :
             string += "phone : " + response['data']['phone']+"\n"
             string += "site : " + response['data']['site']+"\n"
             string += "address : " + response['data']['address']+"\n"
-            string += "memo : " + response['data']['memo']+"\n"
             return string
         return "[-] fail :("
     except :
