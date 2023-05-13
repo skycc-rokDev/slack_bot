@@ -38,7 +38,6 @@ def del_friend() :
     string += ""
     return string
 
-
 def not_command() :
     string = ""
     string += "command not found :)\n"
