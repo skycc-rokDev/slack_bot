@@ -84,19 +84,24 @@ fail -> other else
 '''
 
 def func_add_friend(full_query) :
-    try :
-        email = full_query[2]['url'].split("mailto:")[1]
-        tmp = full_query[3]['text'].split(" ")
-        pw = tmp[1]
-        target_token = tmp[2]
-        data = {'email' : email, 'pw' : pw, 'target_token' : target_token}
-        url = host + "/add_friend"
-        status = post_request(url, data)
-        if (status == 200) :
-            return "[+] success"
-        return "[-] fail :("
-    except :
-        return "[-] fail :("
+    #try :
+    email = full_query[2]['url'].split("mailto:")[1]
+    tmp = full_query[3]['text'].split(" ")
+    print(tmp)
+    pw = tmp[1]
+    print(email)
+    print(pw)
+    token = get_my_token(email, pw)
+    print(token)
+    target_email = full_query[4]['url'].split("mailto:")[1]
+    url = host + "/relation/add"
+    data = {"email":target_email}
+    status = post_request_token(url, data, token)
+    if (status == 200) :
+        return "[+] success"
+    #    return "[-] fail :("
+    #except :
+    #    return "[-] fail :("
 '''
 method : post
 url : example.com/add_friend

@@ -7,6 +7,7 @@ def get_my_token(email, pw) :
     data = {'email': email, 'password':pw}
     response = requests.post("http://13.125.208.1:3000/auth/login", data=data)
     response = json.loads(response.text)
+    print(response)
     return(response['token'])
     #except :
     #    return 0
