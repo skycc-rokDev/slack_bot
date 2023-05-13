@@ -42,12 +42,23 @@ def func_my_info(full_query) :
         email = full_query[2]['url'].split("mailto:")[1]
         pw = full_query[3]['text'][1:]
         token = get_my_token(email, pw)
+        print(token)
         url = host + "/card/mycard"
-        data = ""
-        status, response = post_request_token_get(url, data, token)
+        data = {"data" : "data"}
+        status, response = get_request_token(url, token)
         if (status == 200) :
+            response = json.loads(response)
             print(response)
-            return "[+] success"
+            string = ""
+            string += "email : " + response['data']['email']+"\n"
+            string += "email2 : " + response['data']['email2']+"\n"
+            string += "company : " + response['data']['company']+"\n"
+            string += "name : " + response['data']['name']+"\n"
+            string += "phone : " + response['data']['phone']+"\n"
+            string += "site : " + response['data']['site']+"\n"
+            string += "address : " + response['data']['address']+"\n"
+            string += "memo : " + response['data']['memo']+"\n"
+            return string
         return "[-] fail :("
     except :
         return "[-] fail :("

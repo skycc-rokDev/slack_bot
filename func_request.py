@@ -18,11 +18,10 @@ def post_request_token(url, data, token) :
     response = requests.post(url, data=data, headers=headers)
     return response.status_code
 
-def post_request_token_get(url, data, token) :
+def get_request_token(url, token) :
     headers = {'token': token}
-    print(url)
-    print(data)
-    response = requests.post(url, data=data, headers=headers)
+    response = requests.get(url, headers=headers)
+    print(response)
     return response.status_code, response.text
 
 def post_request(url, data) :
