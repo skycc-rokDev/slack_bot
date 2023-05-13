@@ -32,7 +32,8 @@ def event_handler(event_type, slack_event):
     string_slack_event = str(slack_event)
     if string_slack_event.find("{'type': 'user', 'user_id': ") != -1:  # 멘션으로 호출
         try:
-            user_query = slack_event['event']['blocks'][0]['elements'][0]['elements'][1]['text']
+            user_query = slack_event['event']['blocks'][1 v]['elements'][0]['elements'][1]['text']
+            print("user:"+user_query)
             answer = get_answer(user_query[1:])
             post_message(token,channel,answer)
             return make_response("ok", 200, )
