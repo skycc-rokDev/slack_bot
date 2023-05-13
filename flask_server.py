@@ -17,7 +17,6 @@ def post_message(token, channel, text):
     print(response)
 
 def get_answer(user_query, full_query):
-    print(user_query)
     if (user_query == "help") :
         return func_usage()
     elif (user_query == "my_info ") :
@@ -28,8 +27,8 @@ def get_answer(user_query, full_query):
         return func_add_friend(full_query)
     elif (user_query == "register ") :
         return func_register(full_query)
-    elif (user_query =="tmp") :
-        return get_my_token("ldj6192@gmail.com", "password");
+    elif (user_query == "card_add ") :
+        return func_card_add(full_query)
     return func_not_command()
 
 def event_handler(event_type, slack_event):
@@ -38,7 +37,6 @@ def event_handler(event_type, slack_event):
     if string_slack_event.find("{'type': 'user', 'user_id': ") != -1:  # 멘션으로 호출
         try:
             user_query = slack_event['event']['blocks'][0]['elements'][0]['elements']
-            print(user_query)
             answer = get_answer(user_query[1]['text'][1:], user_query)
             post_message(token,channel,answer)
             return make_response("ok", 200, )

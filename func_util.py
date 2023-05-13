@@ -8,16 +8,45 @@ def func_usage() :
     string += "- my_info [your_mail] [your_pw]\n"
     string += "- add_friend [your_mail] [your_pw] [target_token]\n"
     string += "- del_friend [your_mail] [your_pw] [target_token]\n"
+    string += "- register [your_mail] [your_pw]\n"
+    string += "- card_add [your_main] [your_pw] [email2] [name] [company] [phone] [address] [site] [role]\n"
     return string
+
+def func_card_add(full_query) :
+    try :
+        print(full_query)
+        email = full_query[2]['url'].split("mailto:")[1]
+        pw = full_query[3]['text'][1:]
+        token = get_my_token(email, pw.split(" ")[0])
+        print("token : " + token)
+        email2 = full_query[4]['text']
+        tmp = full_query[5]['text'].split(" ")
+        name = tmp[1]
+        company = tmp[2]
+        phone = tmp[3]
+        address = tmp[4]
+        site = full_query[6]['text'].split(" ")[0]
+        role = full_query[7]['text'].split(" ")[1]
+        data = {'name':name, 'company':company, 'phone':phone, 'address':address, 'site':site, 'role':role, 'email2':email2}
+        url = host + "/card/add"
+        status = post_request_token(url, data, token)
+        if (status == 200) :
+            return "[+] success"
+        return "[-] fail :("
+    except :
+        return "[-] fail :("
+
 
 def func_my_info(full_query) :
     try :
         email = full_query[2]['url'].split("mailto:")[1]
         pw = full_query[3]['text'][1:]
-        data = {'email' : email, 'pw' : pw}
-        url = host + "/info"
-        status = post_request(url, data)
+        token = get_my_token(email, pw)
+        url = host + "/card/mycard"
+        data = ""
+        status, response = post_request_token_get(url, data, token)
         if (status == 200) :
+            print(response)
             return "[+] success"
         return "[-] fail :("
     except :
