@@ -22,6 +22,15 @@ def func_my_info(full_query) :
         return "[-] fail :("
     except :
         return "[-] fail :("
+'''
+method : post
+url : example.com/info
+data : {'email':email, 'pw':pw}
+
+expect response :
+success -> 200 code
+fail -> other else
+'''
 
 def func_add_friend(full_query) :
     try :
@@ -37,6 +46,15 @@ def func_add_friend(full_query) :
         return "[-] fail :("
     except :
         return "[-] fail :("
+'''
+method : post
+url : example.com/add_friend
+data : {'email':email, 'pw':pw, 'target_token':target_token}
+
+expect response :
+success -> 200 code
+fail -> other else
+'''
 
 def func_del_friend(full_query) :
     try :
@@ -52,6 +70,16 @@ def func_del_friend(full_query) :
         return "[-] fail :("
     except :
         return "[-] fail :("
+'''
+method : post
+url : example.com/del_friend
+data : {'email':email, 'pw':pw, 'target_token':target_token}
+
+expect response :
+success -> 200 code
+fail -> other else
+'''
+
 
 def func_not_command() :
     string = ""
