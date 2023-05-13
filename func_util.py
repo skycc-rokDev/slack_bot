@@ -1,3 +1,7 @@
+#tmp
+from func_request import *
+host = "https://vpqbagk.request.dreamhack.games"
+
 def func_usage() :
     string = ""
     string += "[usage]\n"
@@ -7,37 +11,47 @@ def func_usage() :
     return string
 
 def func_my_info(full_query) :
-    email = full_query[2]['url'].split("mailto:")[1]
-    pw = full_query[3]['text'][1:]
-    print(email)
-    print(pw)
-    string = "to do\n"
-    string += ""
-    return string
+    try :
+        email = full_query[2]['url'].split("mailto:")[1]
+        pw = full_query[3]['text'][1:]
+        data = {'email' : email, 'pw' : pw}
+        url = host + "/info"
+        status = post_request(url, data)
+        if (status == 200) :
+            return "[+] success"
+        return "[-] fail :("
+    except :
+        return "[-] fail :("
 
 def func_add_friend(full_query) :
-    email = full_query[2]['url'].split("mailto:")[1]
-    tmp = full_query[3]['text'].split(" ")
-    pw = tmp[1]
-    target_token = tmp[2]
-    print(email)
-    print(pw)
-    print(target_token)
-    string = "to do\n"
-    string += ""
-    return string
+    try :
+        email = full_query[2]['url'].split("mailto:")[1]
+        tmp = full_query[3]['text'].split(" ")
+        pw = tmp[1]
+        target_token = tmp[2]
+        data = {'email' : email, 'pw' : pw, 'target_token' : target_token}
+        url = host + "/add_friend"
+        status = post_request(url, data)
+        if (status == 200) :
+            return "[+] success"
+        return "[-] fail :("
+    except :
+        return "[-] fail :("
 
-def func_del_friend() :
-    email = full_query[2]['url'].split("mailto:")[1]
-    tmp = full_query[3]['text'].split(" ")
-    pw = tmp[1]
-    target_token = tmp[2]
-    print(email)
-    print(pw)
-    print(target_token)
-    string = "to do\n"
-    string += ""
-    return string
+def func_del_friend(full_query) :
+    try :
+        email = full_query[2]['url'].split("mailto:")[1]
+        tmp = full_query[3]['text'].split(" ")
+        pw = tmp[1]
+        target_token = tmp[2]
+        data = {'email' : email, 'pw' : pw, 'target_token' : target_token}
+        url = host + "/del_friend"
+        status = post_request(url, data)
+        if (status == 200) :
+            return "[+] success"
+        return "[-] fail :("
+    except :
+        return "[-] fail :("
 
 def func_not_command() :
     string = ""
