@@ -26,6 +26,8 @@ def get_answer(user_query, full_query):
         return func_del_friend(full_query)
     elif (user_query == "add_friend ") :
         return func_add_friend(full_query)
+    elif (user_query == "register ") :
+        return func_register(full_query)
     return func_not_command()
 
 def event_handler(event_type, slack_event):

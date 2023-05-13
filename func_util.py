@@ -1,6 +1,6 @@
 #tmp
 from func_request import *
-host = "https://vpqbagk.request.dreamhack.games"
+host = "http://13.125.208.1:3000"
 
 def func_usage() :
     string = ""
@@ -80,6 +80,38 @@ success -> 200 code
 fail -> other else
 '''
 
+def func_register(full_query) :
+    try :
+        email = full_query[2]['url'].split("mailto:")[1]
+        pw = full_query[3]['text'][1:]
+        data = {'email' : email, 'password' : pw}
+        print(pw)
+        print(data)
+        print(email)
+        url = host + "/auth/register"
+        status = post_request(url, data)
+        print(status)
+        if (status == 200) :
+            return "[+] success"
+        return "[-] fail :("
+    except :
+        return "[-] fail :("
+
+'''
+method : post
+url : http://13.125.208.1:3000/auth/register
+data : {'email':email, 'password':pw}
+
+expect response :
+success -> 200 code
+{
+	status: statuscode,
+	messgae: "messgae",
+	token : "YOUR_JWT_TOKEN"
+}
+
+fail -> other else
+'''
 
 def func_not_command() :
     string = ""
