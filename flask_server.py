@@ -3,6 +3,7 @@ import json
 from flask import Flask, request, make_response
 from slacker import Slacker
 import requests
+from func_util import *
 
 app = Flask(__name__)
 
@@ -15,41 +16,16 @@ def post_message(token, channel, text):
     )
     print(response)
 
-def usage() :
-    string = ""
-    string += "[usage]\n"
-    string += "- my_info [your_mail] [your_pw]\n"
-    string += "- add_friend [your_mail] [your_pw] [target_token]\n"
-    string += "- del_friend [your_mail] [your_pw] [target_token]\n"
-    return string
-
-def my_info() :
-    string = "to do\n"
-    string += ""
-    return string
-
-def add_friend() :
-    string = "to do\n"
-    string += ""
-    return string
-
-def del_friend() :
-    string = "to do\n"
-    string += ""
-    return string
-
-def not_command() :
-    string = ""
-    string += "command not found :)\n"
-    string += "@inple_Bot help\n"
-    return string
-
 def get_answer(user_query):
     if (user_query == "help") :
-        return usage()
+        return func_usage()
     elif (user_query == "my_info") :
-        return my_info()
-    return not_command()
+        return func_my_info()
+    elif (user_query == "del_friend") :
+        return func_my_info()
+    elif (user_query == "add_friend") :
+        return func_my_info()
+    return func_not_command()
 
 def event_handler(event_type, slack_event):
     channel = slack_event["event"]["channel"]
